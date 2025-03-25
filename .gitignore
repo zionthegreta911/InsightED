@@ -1,0 +1,19 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
+dist/
+.env
+
+# Laravel
+/vendor
+/storage/*.key
+/public/storage
+.env
+
+# System
+.DS_Store
+*.log

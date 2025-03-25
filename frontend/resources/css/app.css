@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap");
+
+
+
+body {
+
+   
+
+    
+    @apply font-sans; /* This applies the Poppins font globally */
+  }
+  /* Sidebar Styling */
+/* Sidebar - Smaller & Proportional */
+/* Sidebar - Smaller & Proportional */
+/* ✅ Parent layout that holds Sidebar and Dashboard */
+.main-layout {
+    display: flex; /* Use Flexbox layout to place elements side-by-side */
+    min-height: 100vh; /* Full screen height */
+    width: 100%; /* Full width */
+}
+
+
+/* ✅ Sidebar Styling */
+/* Ensure the sidebar has a fixed width and doesn't take up unnecessary height */
+.sidebar {
+    width: 16rem; /* Fixed width for the sidebar */
+    min-height: 100vh; /* Full height */
+    background-color: #f9fafb; /* Light background color for sidebar */
+    padding: 1rem;
+    border-right: 1px solid #e5e7eb; /* Sidebar border */
+    z-index: 1; /* Ensure sidebar is on top of the content */
+}
+
+/* ✅ Dropzone for File Upload */
+.dropzone {
+    border: 2px dashed #d1d5db;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+.dropzone:hover {
+    border-color: #3b82f6; /* Hover effect */
+}
+
+/* ✅ Status Indicator */
+.status-indicator {
+    background-color: #ecfdf5; /* Green background */
+    color: #047857; /* Green text */
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+}
+.status-indicator div {
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: #10b981;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+/* ✅ Button Styles */
+.sidebar-button {
+    width: 100%;
+    background-color: #2563eb; /* Blue */
+    color: white;
+    padding: 0.75rem 1rem;
+    border-radius: 0.375rem;
+    transition: background-color 0.2s;
+}
+.sidebar-button:hover {
+    background-color: #1e40af; /* Darker blue */
+}
+.sidebar-secondary-button {
+    width: 100%;
+    background-color: white;
+    color: #374151; /* Gray */
+    padding: 0.75rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+.sidebar-secondary-button:hover {
+    background-color: #f3f4f6; /* Light gray */
+}
+
+/* ✅ Fixes for the Download GIF */
+.download-gif {
+    width: 20px; 
+    height: 20px; 
+    object-fit: contain; 
+}
+
+/* ✅ Dashboard Styling */
+/* ✅ Ensure Sidebar & Dashboard Are Side by Side */
+/* ✅ Dashboard Styling */
+.dashboard-container {
+    flex: 1; /* Takes remaining space beside the sidebar */
+    min-height: 100vh; /* Full height */
+    padding: 1.5rem;
+
+    color: rgb(117, 128, 231); /* Light text color */
+    position: relative;
+    margin-left: 18rem; /* Offset the dashboard to the right of the fixed sidebar (slightly increased) */
+    margin-top: -1490px; /* Use fixed pixels to prevent movement during zoom */
+    overflow: auto; /* Allow content to scroll if necessary */
+    display: flex; /* Use Flexbox for inner content */
+    flex-direction: column; /* Stack sections vertically */
+    font-size: 0.875rem; /* Reduce font size for more compact content */
+    background-image: url('https://i.pinimg.com/originals/d7/94/ce/d794ce07f7f8c654059b2c8a93b0a0f0.gif'); /* Set the background to the GIF */
+    background-size: cover; /* Ensure the background covers the entire container */
+    background-position: center; /* Center the background image */
+   
+}
+
+
+
+
+
+/* ✅ Section Box Styling */
+.dashboard-section {
+    opacity: 80%;
+    font-size: 0.875rem; /* Reduce font size */
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    width: 100%;
+    max-width: 800px; /* Prevents it from being too wide */
+    margin-bottom: 1rem;
+}
+
+/* ✅ Chart Section */
+.dashboard-chart {
+    display: flex;
+    justify-content: center;
+}
+
+/* Aurora Effect */
+/* Aurora Effect */
+.aurora {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.aurora__item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, royalblue, cyan, violet);
+    background-size: 400% 400%;
+    animation: auroraAnimation 5s ease infinite;
+    mask-image: linear-gradient(white, black); /* Creates the fading mask effect */
+}
+
+@keyframes auroraAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Apply the effect to the text */
+/* Title Styling */
+.title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: transparent; /* Make text transparent to show aurora effect */
+    background-image: linear-gradient(45deg, royalblue, cyan, violet);
+    background-clip: text;
+    -webkit-background-clip: text; /* For Safari */
+    animation: auroraAnimation 5s ease infinite;
+    
+    margin-top: -1rem; /* Reduce space from the top */
+    margin-bottom: -3.5rem; /* Reduce space from the bottom */
+}
+
