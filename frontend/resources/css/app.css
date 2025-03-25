@@ -116,7 +116,7 @@ body {
     display: flex; /* Use Flexbox for inner content */
     flex-direction: column; /* Stack sections vertically */
     font-size: 0.875rem; /* Reduce font size for more compact content */
-    background-image: url('https://i.pinimg.com/originals/d7/94/ce/d794ce07f7f8c654059b2c8a93b0a0f0.gif'); /* Set the background to the GIF */
+    background-image: url('https://4kwallpapers.com/images/wallpapers/macos-monterey-stock-black-dark-mode-layers-5k-2560x1440-5889.jpg'); /* Set the background to the GIF */
     background-size: cover; /* Ensure the background covers the entire container */
     background-position: center; /* Center the background image */
    
@@ -190,5 +190,84 @@ body {
     
     margin-top: -1rem; /* Reduce space from the top */
     margin-bottom: -3.5rem; /* Reduce space from the bottom */
+}
+
+/* Student list and item styles */
+/* Student list and item styles */
+/* Flexbox Layout for the student list item */
+/* Flexbox Layout for the student list item */
+.student-item {
+    display: flex;
+    justify-content: space-between;  /* Ensure there's space between name and button */
+    align-items: center;  /* Align button and name vertically centered */
+    padding: 16px;  /* Add padding around the list item */
+    background-color: #2d3748;  /* Dark background for the list item */
+    color: white;
+    border-radius: 8px;
+    margin-bottom: 10px;  /* Space between student list items */
+}
+
+/* Container for student info */
+.student-info {
+    flex-grow: 1;  /* Allow the student info to take up the remaining space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Styling for the student's name and ID */
+.student-name {
+    font-size: 16px;  /* Make the name slightly bigger */
+    font-weight: bold;
+}
+
+/* Styling for the Most Dominant Trait */
+.most-dominant-trait {
+    font-size: 14px;
+    color: #9ca3af;  /* Lighter color for the trait */
+}
+
+/* Styling for the Analyze button */
+.btn-analyze {
+    background-color: #4CAF50;  /* Green background */
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for the button */
+.btn-analyze:hover {
+    background-color: #45a049;  /* Darker green on hover */
+}
+.analysis-result {
+    display: flex;  /* Flex layout to align the left and right containers */
+    justify-content: space-between;  /* Space out the left and right sections */
+    gap: 1rem;  /* Space between the left and right containers */
+    align-items: flex-start;  /* Align at the top */
+}
+
+.left-container {
+    flex: 1;  /* Takes the remaining space */
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.right-container {
+    width: 250px;  /* Medium-sized container */
+    background-color: #1e293b;  /* Dark background */
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#dominantTrait {
+    font-size: 18px;
+    color: #34d399;  /* Green color for the dominant trait */
 }
 

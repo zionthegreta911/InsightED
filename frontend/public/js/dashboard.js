@@ -30,15 +30,20 @@ function fetchStudentList() {
         .then(response => response.json())
         .then(data => {
             let studentList = document.getElementById("studentList");
-            studentList.innerHTML = "";
+            studentList.innerHTML = ""; // Clear existing list
 
             data.forEach(student => {
                 let listItem = document.createElement("li");
+                listItem.classList.add("student-item"); // Apply student-item class
                 listItem.innerHTML = `
-                    ${student["STUDENT NAME"]} (ID: ${student["STUDENT ID"]}) 
-                    <button onclick="analyzeStudent(${student['STUDENT ID']})">Analyze</button>
+                    <div class="student-header">
+                        <span class="student-name">${student["STUDENT NAME"]}</span>
+                        <button class="btn-view-profile" onclick="analyzeStudent(${student['STUDENT ID']})">Analyze</button>
+                    </div>
+                    <p class="student-primary-trait">Primary Trait: ${student["primary_trait"]}</p>
+                    <button class="btn-update" onclick="updateStudent(${student['STUDENT ID']})">Update</button>
                 `;
-                studentList.appendChild(listItem);
+                studentList.appendChild(listItem); // Add the new student item to the list
             });
         })
         .catch(error => console.error("Error fetching student data:", error));
@@ -111,30 +116,44 @@ function fetchDashboardStats() {
     fetch(`${apiUrl}/dashboard/stats`)
         .then(response => response.json())
         .then(data => {
-            document.getElementById("totalSurveys").innerText = data.totalSurveys;
+            // Ensure that totalSurveys exists before updating
+            if (data.totalSurveys !== undefined) {
+                document.getElementById("totalSurveys").innerText = data.totalSurveys;
+            } else {
+                console.error("Error: totalSurveys is undefined.");
+            }
 
             let dominantTraitsDiv = document.getElementById("dominantTraits");
             dominantTraitsDiv.innerHTML = "";
 
-            Object.keys(data.dominantTraitCount).forEach(trait => {
-                let total = data.dominantTraitCount[trait].total;
-                let ids = data.dominantTraitCount[trait].ids.join(", ");
-                let traitBox = document.createElement("div");
+            if (data.dominantTraitCount) {
+                Object.keys(data.dominantTraitCount).forEach(trait => {
+                    let total = data.dominantTraitCount[trait].total;
+                    let ids = data.dominantTraitCount[trait].ids.join(", ");
+                    let traitBox = document.createElement("div");
 
-                traitBox.classList.add("trait-box");
-                traitBox.innerHTML = `
-                    <h4>${trait.toUpperCase()}</h4>
-                    <p>${total} / ${data.totalSurveys} students</p>
-                    <small>ID Nos: ${ids}</small>
-                `;
-                dominantTraitsDiv.appendChild(traitBox);
+                    traitBox.classList.add("trait-box");
+                    traitBox.innerHTML = `
+                        <h4>${trait.toUpperCase()}</h4>
+                        <p>${total} / ${data.totalSurveys} students</p>
+                        <small>ID Nos: ${ids}</small>
+                    `;
+                    dominantTraitsDiv.appendChild(traitBox);
+                });
+            } else {
+                console.error("Error: dominantTraitCount is undefined.");
+            }
 
-            });
-
-            updateBarChart(data.traitAverages);
+            // Check if traitAverages exist before trying to update the chart
+            if (data.traitAverages) {
+                updateBarChart(data.traitAverages);
+            } else {
+                console.error("Error: traitAverages is undefined.");
+            }
         })
         .catch(error => console.error("Error fetching dashboard stats:", error));
 }
+
 
 // Function to Generate and Update Bar Chart
 function generateCharts() {
@@ -211,26 +230,26 @@ function extractDominantTrait(analysisHTML) {
     return null;
 }
 
+// Function to Analyze Individual Student and Fetch the Most Dominant Trait
 function analyzeStudent(studentId) {
     fetch(`${apiUrl}/assess/individual?student_id=${studentId}`)
         .then(response => response.json())
         .then(data => {
+            // Display the full analysis result
             document.getElementById("analysisResult").innerHTML = data.result;
             
-            // Extract the dominant trait from the analysis result
-            const dominantTrait = extractDominantTrait(data.result);
+            // Extract the most dominant trait (assuming the format is "Most Dominant Trait: <Trait Name>")
+            let dominantTrait = data.result.match(/Most Dominant Trait: (.*)/)[1]; // Extract dominant trait text
             
-            console.log("Dominant Trait:", dominantTrait);  // Log the dominant trait
-            
-            if (dominantTrait) {
-                // Call fetchRecommendation with the dominant trait
-                fetchRecommendation(dominantTrait);
-            } else {
-                console.error("❌ No dominant trait found!");
-            }
+            // Update the Most Dominant Trait container on the right side
+            document.getElementById("dominantTrait").innerText = dominantTrait;
+
+            // Optionally, fetch AI recommendations for the student
+            fetchRecommendation(studentId); // Fetch AI recommendation for the student
         })
         .catch(error => console.error("Error analyzing student:", error));
 }
+
 
 
 // Function to fetch AI recommendation based on dominant trait

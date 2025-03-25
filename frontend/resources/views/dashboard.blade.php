@@ -90,9 +90,23 @@
 
 
             <div class="dashboard-section">
-                <h3>Analysis Result</h3>
-                <div id="analysisResult"></div>
-            </div>
+  <div class="dashboard-section">
+    <h3>Analysis Result</h3>
+    <div class="analysis-result">
+        <!-- Left Part of the Analysis Result -->
+        <div id="analysisResult" class="left-container">
+            <!-- Content will be dynamically added here -->
+        </div>
+
+        <!-- Right Part of the Analysis Result (Medium-Sized Container) -->
+        <div id="dominantTraitContainer" class="right-container">
+            <h3>Most Dominant Trait:</h3>
+            <p id="dominantTrait">Loading...</p>
+        </div>
+    </div>
+</div>
+
+
 
             <div class="dashboard-section">
                 <h3>AI Recommendations</h3>
@@ -141,23 +155,30 @@
 
         // Function to Fetch Student List from Flask API
         function fetchStudentList() {
-            fetch(`${apiUrl}/students`)
-            .then(response => response.json())
-            .then(data => {
-                let studentList = document.getElementById("studentList");
-                studentList.innerHTML = "";
+    fetch(`${apiUrl}/students`)
+        .then(response => response.json())
+        .then(data => {
+            let studentList = document.getElementById("studentList");
+            studentList.innerHTML = "";  // Clear any previous list
 
-                data.forEach(student => {
-                    let listItem = document.createElement("li");
-                    listItem.innerHTML = `
-                        ${student["STUDENT NAME"]} (ID: ${student["STUDENT ID"]}) 
-                        <button onclick="analyzeStudent(${student['STUDENT ID']})">Analyze</button>
-                    `;
-                    studentList.appendChild(listItem);
-                });
-            })
-            .catch(error => console.error("Error fetching student data:", error));
-        }
+            data.forEach(student => {
+                let listItem = document.createElement("li");
+                listItem.classList.add("student-item", "flex", "justify-between", "items-center", "p-4", "bg-gray-800", "text-white", "rounded-lg", "mb-4");
+                
+                // HTML for each student entry
+                listItem.innerHTML = `
+                    <div class="student-info">
+                        <span class="student-name">${student["STUDENT NAME"]} (ID: ${student["STUDENT ID"]})</span>
+                        <p class="most-dominant-trait">Most Dominant Trait: Openness</p> <!-- Update dynamically as per your data -->
+                    </div>
+                    <button class="btn-analyze bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" onclick="analyzeStudent(${student['STUDENT ID']})">Analyze</button>
+                `;
+                
+                studentList.appendChild(listItem);  // Append student list item to the list
+            });
+        })
+        .catch(error => console.error("Error fetching student data:", error));
+}
 
         // Function to Analyze Individual Student
         function analyzeStudent(studentId) {
