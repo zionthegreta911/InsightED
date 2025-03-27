@@ -26,7 +26,7 @@ function uploadCSV() {
 
 // Function to Fetch Student List from Flask API
 function fetchStudentList() {
-\backe    fetch(`${apiUrl}/students`)
+  fetch(`${apiUrl}/students`)
         .then(response => response.json())
         .then(data => {
             let studentList = document.getElementById("studentList");
